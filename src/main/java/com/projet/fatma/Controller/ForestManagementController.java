@@ -1,6 +1,7 @@
 package com.projet.fatma.Controller;
 
 import com.projet.fatma.models.dto.ForestManagement;
+import com.projet.fatma.models.dto.MessageDto;
 import com.projet.fatma.models.dto.OtherLandUseChanges;
 import com.projet.fatma.services.KafkaForesetManagmentService;
 import com.projet.fatma.services.KafkaProducerLandUseService;
@@ -14,6 +15,8 @@ import org.springframework.web.bind.annotation.*;
 import java.util.UUID;
 
 
+@CrossOrigin("*")
+
 @RestController
 @Slf4j
 public class ForestManagementController {
@@ -22,22 +25,22 @@ public class ForestManagementController {
     KafkaForesetManagmentService kafkaForesetManagmentService ;
 
     @PostMapping("/Create_Forest_Management")
-    ResponseEntity<String>createLandUse(@RequestBody ForestManagement forestManagement){
+    ResponseEntity<?>createLandUse(@RequestBody ForestManagement forestManagement){
         forestManagement.getForestManagement().setStringId(UUID.randomUUID().toString());
         kafkaForesetManagmentService.create(forestManagement);
-        return new ResponseEntity<>("Forest added successfully", HttpStatus.CREATED);
+        return new ResponseEntity<>(new MessageDto("Forest added successfully"), HttpStatus.CREATED);
 
     }
 
 
 
     @PutMapping("/Update_Forest_Management/{forestId}")
-    public ResponseEntity<String> updateForestManagement(
+    public ResponseEntity<?> updateForestManagement(
             @PathVariable String forestId,
             @RequestBody ForestManagement updatedForest) {
         try {
             kafkaForesetManagmentService.update(forestId,updatedForest);
-            return new ResponseEntity<>("forest updated successfully", HttpStatus.OK);
+            return new ResponseEntity<>(new MessageDto("forest updated successfully"), HttpStatus.OK);
         } catch (EntityNotFoundException e) {
             // Handle the case where the project with the given ID is not found
             return ResponseEntity.status(HttpStatus.NOT_FOUND).body("forest not found with ID: " + forestId);
@@ -49,7 +52,7 @@ public class ForestManagementController {
     }
 
     @DeleteMapping("/Delete_Forest_Management/{forestId}")
-    public ResponseEntity<String> deleteLandUse(@PathVariable String forestId) {
+    public ResponseEntity<?> deleteLandUse(@PathVariable String forestId) {
         try {
             // Delete the project description in the database
             kafkaForesetManagmentService.delete(forestId );
@@ -58,7 +61,7 @@ public class ForestManagementController {
             log.info("Deleted forest with ID: {}", forestId);
 
             // Return a success response
-            return ResponseEntity.ok("forest deleted successfully");
+            return ResponseEntity.ok(new MessageDto("forest deleted successfully"));
         } catch (EntityNotFoundException e) {
             // Handle the case where the project with the given ID is not found
             return ResponseEntity.status(HttpStatus.NOT_FOUND).body("forest not found with ID: " + forestId);

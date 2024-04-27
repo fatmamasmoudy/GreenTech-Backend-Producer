@@ -1,5 +1,6 @@
 package com.projet.fatma.Controller;
 
+import com.projet.fatma.models.dto.MessageDto;
 import com.projet.fatma.models.dto.OtherLandUseChanges;
 import com.projet.fatma.models.dto.ProjectDescription;
 import com.projet.fatma.services.KafkaProducerLandUseService;
@@ -20,9 +21,9 @@ public class OtherLandUseChangesController {
     KafkaProducerLandUseService kafkaProducerLandUseService ;
 
     @PostMapping("/Create_Land_Use_Changes")
-    ResponseEntity<String>createLandUse(@RequestBody OtherLandUseChanges otherLandUseChanges){
+    ResponseEntity<?>createLandUse(@RequestBody OtherLandUseChanges otherLandUseChanges){
         kafkaProducerLandUseService.create(otherLandUseChanges);
-        return new ResponseEntity<>("Project added successfully", HttpStatus.CREATED);
+        return new ResponseEntity<>(new MessageDto("Project added successfully"), HttpStatus.CREATED);
 
     }
 

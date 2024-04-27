@@ -1,5 +1,8 @@
     package com.projet.fatma.Controller;
 
+    import com.projet.fatma.models.Continent;
+    import com.projet.fatma.models.Country;
+    import com.projet.fatma.models.dto.MessageDto;
     import com.projet.fatma.models.dto.ProjectDescription;
     import com.projet.fatma.services.KafkaProducerService;
     import jakarta.persistence.EntityNotFoundException;
@@ -21,21 +24,21 @@
         KafkaProducerService kafkaProducerService ;
 
         @PostMapping("/CreateProjectDescription")
-        ResponseEntity<String>createProject(@RequestBody ProjectDescription projectDescription){
+        ResponseEntity<?>createProject(@RequestBody ProjectDescription projectDescription){
             projectDescription.getProjectDescription().setStringId(UUID.randomUUID().toString());
             kafkaProducerService.create(projectDescription);
-            return new ResponseEntity<>("Project added successfully", HttpStatus.CREATED);
+            return new ResponseEntity<>(new MessageDto("Project added successfully"), HttpStatus.CREATED);
 
         }
 
 
     @PutMapping("/Update_Project_Description/{projectId}")
-    public ResponseEntity<String> updateProjectDescription(
+    public ResponseEntity<?> updateProjectDescription(
             @PathVariable String projectId,
             @RequestBody ProjectDescription updatedProjectDescription) {
         try {
             kafkaProducerService.update(projectId,updatedProjectDescription);
-            return new ResponseEntity<>("Project updated successfully", HttpStatus.OK);
+            return new ResponseEntity<>(new MessageDto("Project updated successfully"), HttpStatus.OK);
         } catch (EntityNotFoundException e) {
             // Handle the case where the project with the given ID is not found
             return ResponseEntity.status(HttpStatus.NOT_FOUND).body("Project not found with ID: " + projectId);
@@ -47,7 +50,7 @@
     }
 
     @DeleteMapping("/Delete_Project_Description/{projectId}")
-    public ResponseEntity<String> deleteProjectDescription(@PathVariable String projectId) {
+    public ResponseEntity<?> deleteProjectDescription(@PathVariable String projectId) {
         try {
             // Delete the project description in the database
             kafkaProducerService.delete(projectId );
@@ -56,7 +59,7 @@
             log.info("Deleted project with ID: {}", projectId);
 
             // Return a success response
-            return ResponseEntity.ok("Project deleted successfully");
+            return ResponseEntity.ok(new MessageDto("Project deleted successfully"));
         } catch (EntityNotFoundException e) {
             // Handle the case where the project with the given ID is not found
             return ResponseEntity.status(HttpStatus.NOT_FOUND).body("Project not found with ID: " + projectId);

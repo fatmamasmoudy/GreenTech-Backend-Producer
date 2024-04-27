@@ -30,8 +30,6 @@ public class ProjectDescriptionProducer {
     @Enumerated(EnumType.STRING)
     private Country country;
     @Enumerated(EnumType.STRING)
-    private Climate climate;
-    @Enumerated(EnumType.STRING)
     private Moisture moisture;
     @Enumerated(EnumType.STRING)
     private SoilType soilType;

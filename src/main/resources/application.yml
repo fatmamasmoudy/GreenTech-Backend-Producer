@@ -24,7 +24,7 @@ spring:
 keycloak:
   realm: ${KEYCLOAK_REALM:exactool}
   clientId: ${KEYCLOAK_CLIENT_ID:exactool}
-  clientSecret: ${KEYCLOAK_SECRET:HnnDVG6Dk2mKmCP5flSLpK3Zp6Xq8RY2}
+  clientSecret: ${KEYCLOAK_SECRET:6AWlyQ0zT0T5O70OCB3C8FabaXgf0Agu}
   host: ${KEYCLOAK_HOST:localhost}
   port: ${KEYCLOAK_PORT:8080}
   admin-username: ${KEYCLOAK_ADMIN_USERNAME:admin@gmail.com}

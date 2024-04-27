@@ -30,12 +30,6 @@ public class KafkaConfig {
                 .replicas(1)
                 .build();
     }
-    @Bean
-    public NewTopic GrassLandTopic() {
-        return TopicBuilder.name("grass-land-topic")
-                .partitions(1)
-                .replicas(1)
-                .build();
-    }
+
 }
 

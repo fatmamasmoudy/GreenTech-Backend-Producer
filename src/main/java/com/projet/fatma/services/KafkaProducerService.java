@@ -52,7 +52,7 @@ public class KafkaProducerService {
         // Update the existing project description with values from the new project description
         existingProjectDescriptionP.setDate(newProject.getDate());
         existingProjectDescriptionP.setContinent(newProject.getContinent());
-        existingProjectDescriptionP.setClimate(newProject.getClimate());
+
         existingProjectDescriptionP.setCountry(newProject.getCountry());
         existingProjectDescriptionP.setCh4(newProject.getCh4());
         existingProjectDescriptionP.setCo2(newProject.getCo2());

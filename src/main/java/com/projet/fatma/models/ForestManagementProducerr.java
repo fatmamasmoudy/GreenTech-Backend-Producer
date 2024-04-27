@@ -21,28 +21,30 @@ public class ForestManagementProducerr {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
     private String stringId ;
-    private ForestVegetation forestVegetation;
-    private ForestDegradationLevel startForestDegradationLevel;
-    private ForestDegradationLevel withoutForestDegradationLevel;
-    private ForestDegradationLevel withForestDegradationLevel;
+    private String forestVegetation;
+    private String startForestDegradationLevel;
+    private String withoutForestDegradationLevel;
+    private String withForestDegradationLevel;
+
     private Boolean withoutFireOccurrence;
     private Boolean withFireOccurrence;
-    static final int FirePeriodicity = 1;
 
-    private float withoutFireImpact;
-    private float withFireImpact;
-    private int startForestedAreaManagement;
-    private int withoutForestedAreaManagement;
-    private Type typeWithoutForestedAreaManagement;
-    private int withForestedAreaManagement;
-    private Type typeWithForestedAreaManagement;
-    private int withoutTotEmissionsForest;
-    private int withTotEmissionsForest;
-    private int balanceForest;
-    private int withoutTotForest;
-    private int withTotForest;
-    private int balanceTotForest;
-    private ForestDegradationLevel degradationLevel;
+    static final int FirePeriodicityWithout = 1;
+    static final int FirePeriodicityWith = 7;
+    private Double withoutFireImpact;
+    private Double withFireImpact;
+    private Double startForestedAreaManagement;
+    private Double withoutForestedAreaManagement;
+    private String typeWithoutForestedAreaManagement;
+    private Double withForestedAreaManagement;
+    private String typeWithForestedAreaManagement;
+    private Double withoutTotEmissionsForest;
+    private Double withTotEmissionsForest;
+    private Double balanceForest;
+    private Double withoutTotForest;
+    private Double withTotForest;
+    private Double balanceTotForest;
+    private String degradationLevel;
     private int biomassLost;
 
 

@@ -61,7 +61,6 @@ services:
   keycloak:
     image: jboss/keycloak
     environment:
-      KEYCLOAK_USER: admin
       KEYCLOAK_PASSWORD: admin_password
       DB_VENDOR: mariadb
       DB_ADDR: mariadb
